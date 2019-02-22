@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Carpool.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CarpoolStoreContainer">
+    <EntitySet Name="Drivers" EntityType="Carpool.Store.Drivers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cars" EntityType="Carpool.Store.Cars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CarMakes" EntityType="Carpool.Store.CarMakes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PickupDelivers" EntityType="Carpool.Store.PickupDelivers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cities" EntityType="Carpool.Store.Cities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Provinces" EntityType="Carpool.Store.Provinces" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CarDriver" Association="Carpool.Store.CarDriver">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="Driver" EntitySet="Drivers" />
+    </AssociationSet>
+    <AssociationSet Name="PickupDeliverDriver" Association="Carpool.Store.PickupDeliverDriver">
+      <End Role="PickupDeliver" EntitySet="PickupDelivers" />
+      <End Role="Driver" EntitySet="Drivers" />
+    </AssociationSet>
+    <AssociationSet Name="CarMakeCar" Association="Carpool.Store.CarMakeCar">
+      <End Role="CarMake" EntitySet="CarMakes" />
+      <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="ProvinceCity" Association="Carpool.Store.ProvinceCity">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Drivers">
+    <Key>
+      <PropertyRef Name="DriverId" />
+    </Key>
+    <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AskPrice" Type="decimal" Nullable="false" />
+    <Property Name="Car_CarId" Type="int" Nullable="false" />
+    <Property Name="PickupDeliver_StsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CarMake_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarMakes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Manufactory" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PickupDelivers">
+    <Key>
+      <PropertyRef Name="StsId" />
+    </Key>
+    <Property Name="StsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Province_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Provinces">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CarDriver">
+    <End Role="Car" Type="Carpool.Store.Cars" Multiplicity="1" />
+    <End Role="Driver" Type="Carpool.Store.Drivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="Driver">
+        <PropertyRef Name="Car_CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PickupDeliverDriver">
+    <End Role="PickupDeliver" Type="Carpool.Store.PickupDelivers" Multiplicity="1" />
+    <End Role="Driver" Type="Carpool.Store.Drivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PickupDeliver">
+        <PropertyRef Name="StsId" />
+      </Principal>
+      <Dependent Role="Driver">
+        <PropertyRef Name="PickupDeliver_StsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarMakeCar">
+    <End Role="CarMake" Type="Carpool.Store.CarMakes" Multiplicity="1" />
+    <End Role="Car" Type="Carpool.Store.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarMake">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="CarMake_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProvinceCity">
+    <End Role="Province" Type="Carpool.Store.Provinces" Multiplicity="1" />
+    <End Role="City" Type="Carpool.Store.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="Province_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Carpool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CarpoolContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Drivers" EntityType="Carpool.Driver" />
+          <EntitySet Name="Cars" EntityType="Carpool.Car" />
+          <EntitySet Name="CarMakes" EntityType="Carpool.CarMake" />
+          <EntitySet Name="PickupDelivers" EntityType="Carpool.PickupDeliver" />
+          <EntitySet Name="Cities" EntityType="Carpool.City" />
+          <EntitySet Name="Provinces" EntityType="Carpool.Province" />
+          <AssociationSet Name="CarDriver" Association="Carpool.CarDriver">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="PickupDeliverDriver" Association="Carpool.PickupDeliverDriver">
+            <End Role="PickupDeliver" EntitySet="PickupDelivers" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="CarMakeCar" Association="Carpool.CarMakeCar">
+            <End Role="CarMake" EntitySet="CarMakes" />
+            <End Role="Car" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="ProvinceCity" Association="Carpool.ProvinceCity">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="Int64" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="AskPrice" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Carpool.CarDriver" FromRole="Driver" ToRole="Car" />
+          <NavigationProperty Name="PickupDeliver" Relationship="Carpool.PickupDeliverDriver" FromRole="Driver" ToRole="PickupDeliver" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Color" Type="String" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Carpool.CarDriver" FromRole="Car" ToRole="Driver" />
+          <NavigationProperty Name="CarMake" Relationship="Carpool.CarMakeCar" FromRole="Car" ToRole="CarMake" />
+        </EntityType>
+        <EntityType Name="CarMake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufactory" Type="String" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Carpool.CarMakeCar" FromRole="CarMake" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="PickupDeliver">
+          <Key>
+            <PropertyRef Name="StsId" />
+          </Key>
+          <Property Name="StsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Carpool.PickupDeliverDriver" FromRole="PickupDeliver" ToRole="Driver" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Province" Relationship="Carpool.ProvinceCity" FromRole="City" ToRole="Province" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProvinceName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Carpool.ProvinceCity" FromRole="Province" ToRole="City" />
+        </EntityType>
+        <Association Name="CarDriver">
+          <End Type="Carpool.Car" Role="Car" Multiplicity="1" />
+          <End Type="Carpool.Driver" Role="Driver" Multiplicity="*" />
+        </Association>
+        <Association Name="PickupDeliverDriver">
+          <End Type="Carpool.PickupDeliver" Role="PickupDeliver" Multiplicity="1" />
+          <End Type="Carpool.Driver" Role="Driver" Multiplicity="*" />
+        </Association>
+        <Association Name="CarMakeCar">
+          <End Type="Carpool.CarMake" Role="CarMake" Multiplicity="1" />
+          <End Type="Carpool.Car" Role="Car" Multiplicity="*" />
+        </Association>
+        <Association Name="ProvinceCity">
+          <End Type="Carpool.Province" Role="Province" Multiplicity="1" />
+          <End Type="Carpool.City" Role="City" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarpoolStoreContainer" CdmEntityContainer="CarpoolContainer">
+    <EntitySetMapping Name="Drivers">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.Driver)">
+        <MappingFragment StoreEntitySet="Drivers">
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AskPrice" ColumnName="AskPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.Car)">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarMakes">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.CarMake)">
+        <MappingFragment StoreEntitySet="CarMakes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Manufactory" ColumnName="Manufactory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PickupDelivers">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.PickupDeliver)">
+        <MappingFragment StoreEntitySet="PickupDelivers">
+          <ScalarProperty Name="StsId" ColumnName="StsId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.City)">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="IsTypeOf(Carpool.Province)">
+        <MappingFragment StoreEntitySet="Provinces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CarDriver" TypeName="Carpool.CarDriver" StoreEntitySet="Drivers">
+      <EndProperty Name="Car">
+        <ScalarProperty Name="CarId" ColumnName="Car_CarId" />
+      </EndProperty>
+      <EndProperty Name="Driver">
+        <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PickupDeliverDriver" TypeName="Carpool.PickupDeliverDriver" StoreEntitySet="Drivers">
+      <EndProperty Name="PickupDeliver">
+        <ScalarProperty Name="StsId" ColumnName="PickupDeliver_StsId" />
+      </EndProperty>
+      <EndProperty Name="Driver">
+        <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CarMakeCar" TypeName="Carpool.CarMakeCar" StoreEntitySet="Cars">
+      <EndProperty Name="CarMake">
+        <ScalarProperty Name="Id" ColumnName="CarMake_Id" />
+      </EndProperty>
+      <EndProperty Name="Car">
+        <ScalarProperty Name="CarId" ColumnName="CarId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProvinceCity" TypeName="Carpool.ProvinceCity" StoreEntitySet="Cities">
+      <EndProperty Name="Province">
+        <ScalarProperty Name="Id" ColumnName="Province_Id" />
+      </EndProperty>
+      <EndProperty Name="City">
+        <ScalarProperty Name="CityId" ColumnName="CityId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

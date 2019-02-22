@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GtaCarpool.Models
+namespace GTACarpool.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace GtaCarpool.Models
     {
         public int CityId { get; set; }
         public string CityName { get; set; }
+        public int Province_Id { get; set; }
     
         public virtual Province Province { get; set; }
     }

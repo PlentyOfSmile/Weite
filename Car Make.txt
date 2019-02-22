@@ -1,0 +1,21 @@
+#region Initdata
+        /// <summary>
+        /// Initail Car Maker Data
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Initdata()
+        {
+            using (var db = new CarpoolContainer())
+            {
+                string[] makes = {"Acura", "Aston Martin", "Audi", "Bentley", "BMW", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ferrari", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lexus", "Lincoln", "Lotus", "Maserati", "Maybach", "Mazda", "Mercedes-Benz", "Mercury", "Mini", "Mitsubishi", "Nissan", "Pontiac", "Porsche", "Rolls-Royce", "Smart", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Vlkswagen", "Volvo", };
+                foreach (var item in makes)
+                {
+                    var newModel = db.Models.Create();
+                    newModel.model = item;
+                    db.Models.Add(newModel);
+                    db.SaveChanges();
+                }
+            }
+            return View();
+        } 
+        #endregion

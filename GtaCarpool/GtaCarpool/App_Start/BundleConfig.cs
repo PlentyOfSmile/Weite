@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace GtaCarpool
+namespace GTACarpool
 {
     public class BundleConfig
     {

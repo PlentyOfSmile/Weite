@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GtaCarpool.Models
+namespace GTACarpool.Models
 {
     using System;
     using System.Collections.Generic;

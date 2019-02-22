@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GtaCarpool.Models
+namespace GTACarpool.Models
 {
     using System;
     using System.Collections.Generic;
@@ -22,9 +22,10 @@ namespace GtaCarpool.Models
     
         public int CarId { get; set; }
         public string Color { get; set; }
+        public int CarMake_Id { get; set; }
     
+        public virtual CarMake CarMake { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Driver> Drivers { get; set; }
-        public virtual CarMake CarMake { get; set; }
     }
 }

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GtaCarpool.Models
+namespace GTACarpool.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CarpoolContainer : DbContext
+    public partial class CarpoolSystemEntities : DbContext
     {
-        public CarpoolContainer()
-            : base("name=CarpoolContainer")
+        public CarpoolSystemEntities()
+            : base("name=CarpoolSystemEntities")
         {
         }
     
@@ -25,11 +25,11 @@ namespace GtaCarpool.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarMake> CarMakes { get; set; }
-        public virtual DbSet<PickupDeliver> PickupDelivers { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<PickupDeliver> PickupDelivers { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
     }
 }

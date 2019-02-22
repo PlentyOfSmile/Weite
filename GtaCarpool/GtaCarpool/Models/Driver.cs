@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GtaCarpool.Models
+namespace GTACarpool.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,8 @@ namespace GtaCarpool.Models
         public long Phone { get; set; }
         public string Address { get; set; }
         public decimal AskPrice { get; set; }
+        public int Car_CarId { get; set; }
+        public int PickupDeliver_StsId { get; set; }
     
         public virtual Car Car { get; set; }
         public virtual PickupDeliver PickupDeliver { get; set; }

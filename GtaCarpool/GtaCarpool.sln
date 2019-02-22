@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtaCarpool", "GtaCarpool\GtaCarpool.csproj", "{B358377E-5B03-493B-8A1B-A89C0F6600DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTACarpool", "GTACarpool\GTACarpool.csproj", "{0FBDC56A-D31B-409D-9089-743BF0EF8A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B358377E-5B03-493B-8A1B-A89C0F6600DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B358377E-5B03-493B-8A1B-A89C0F6600DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B358377E-5B03-493B-8A1B-A89C0F6600DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B358377E-5B03-493B-8A1B-A89C0F6600DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBDC56A-D31B-409D-9089-743BF0EF8A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBDC56A-D31B-409D-9089-743BF0EF8A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBDC56A-D31B-409D-9089-743BF0EF8A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBDC56A-D31B-409D-9089-743BF0EF8A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A1FBE9BB-8B36-440E-BD78-B31053F7B1A3}
+		SolutionGuid = {AD906FBD-1551-4D3E-BD6E-C72B7228C0AF}
 	EndGlobalSection
 EndGlobal

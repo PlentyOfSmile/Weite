@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using GTACarpool.Models;
+using shanuMVCUserRoles.Models;
 
-namespace GTACarpool
+namespace shanuMVCUserRoles
 {
     public class EmailService : IIdentityMessageService
     {
@@ -54,10 +54,10 @@ namespace GTACarpool
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = false,
+                RequireNonLetterOrDigit = true,
                 RequireDigit = true,
-                RequireLowercase = false,
-                RequireUppercase = false,
+                RequireLowercase = true,
+                RequireUppercase = true,
             };
 
             // Configure user lockout defaults

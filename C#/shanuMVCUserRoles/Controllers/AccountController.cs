@@ -8,20 +8,20 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using GTACarpool.Models;
+using shanuMVCUserRoles.Models;
 
-namespace GTACarpool.Controllers
+namespace shanuMVCUserRoles.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        ApplicationDbContext context;
-        public AccountController()
+		ApplicationDbContext context;
+		public AccountController()
         {
-            context = new ApplicationDbContext();
-        }
+			context = new ApplicationDbContext();
+		}
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
@@ -140,9 +140,9 @@ namespace GTACarpool.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                            .ToList(), "Name", "Name");
-            return View();
+			ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+											.ToList(), "Name", "Name");
+			return View();
         }
 
         //
@@ -154,29 +154,30 @@ namespace GTACarpool.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+				var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+				var result = await UserManager.CreateAsync(user, model.Password);
+				if (result.Succeeded)
+				{
+					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    //Assign Role to user Here      
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    return RedirectToAction("Index", "Users");
-                }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                          .ToList(), "Name", "Name");
-                AddErrors(result);
-            }
+					// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+					// Send an email with this link
+					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+					//Assign Role to user Here   
+					await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+					//Ends Here 
+					return RedirectToAction("Index", "Users");
+				}
+				ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+										  .ToList(), "Name", "Name");
+				AddErrors(result);
+			}
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+			// If we got this far, something failed, redisplay form
+			return View(model);
+		}
 
         //
         // GET: /Account/ConfirmEmail
@@ -215,7 +216,7 @@ namespace GTACarpool.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
@@ -455,7 +456,7 @@ namespace GTACarpool.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Users");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

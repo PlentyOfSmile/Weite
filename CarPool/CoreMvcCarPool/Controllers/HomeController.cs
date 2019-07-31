@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MvcCarPool.Models;
+using CoreMvcCarPool.Models;
 
-namespace MvcCarPool.Controllers
+namespace CoreMvcCarPool.Controllers
 {
     public class HomeController : Controller
     {

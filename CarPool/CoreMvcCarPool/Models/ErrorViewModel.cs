@@ -1,6 +1,6 @@
 using System;
 
-namespace MvcCarPool.Models
+namespace CoreMvcCarPool.Models
 {
     public class ErrorViewModel
     {
